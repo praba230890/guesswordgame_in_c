@@ -9,6 +9,7 @@ typedef enum
     } bool;
 
 char* grab_word(char *word_list[]);
+int calculate_star(char *guess_word, char *word, int word_length);
 
 int main(int argc, char *argv){
     char *word_list[] = {"jack", "back", "cock", "luck", "bang", "tool", "dogs", "bags", "life", "kick"};
@@ -32,8 +33,16 @@ int main(int argc, char *argv){
         }
         else{
             int i;
-            for(i=0; i<word_length;i++){printf("_ ");}
-            printf("**!!\n");
+            for(i=0; i<word_length;i++){
+                printf("_ ");
+            }
+            int no_of_stars;
+            no_of_stars = calculate_star(guess_word, word, word_length);
+            for(i=0; i<no_of_stars; i++){
+                printf("*");
+            }
+
+            printf("\n");
         }
     }
     return 0;
@@ -46,4 +55,15 @@ char* grab_word(char *word_list[]){
 
     char *word = word_list[r];
     return word;
+}
+
+int calculate_star(char *guess_word, char *word, int word_length){
+    int i, j;
+    int no_of_stars = 0;
+    for (i=0; i<word_length; i++){
+        if(guess_word[i] == word[i]){
+            no_of_stars++;
+        }
+    }
+    return no_of_stars;
 }
